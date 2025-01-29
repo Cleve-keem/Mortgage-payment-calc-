@@ -5,7 +5,7 @@
   margin: 0;
   box-sizing: border-box;
   scroll-behavior: smooth;
-  font-family: "PlusJakartaSans";
+  font-family: "PlusJakartaSans" -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 :root {
@@ -20,7 +20,8 @@
 }
 
 header {
-  font-family: "PlusJakartaSans-Bold";
+  font-family: "PlusJakartaSans-Bold" -apple-system, BlinkMacSystemFont,
+    sans-serif;
   font-size: 18px;
   margin-bottom: 1rem;
 }
@@ -62,7 +63,8 @@ input {
   font-size: 20px;
   font-weight: 900;
   color: var(--Slate-900);
-  font-family: "PlusJakartaSans-Bold";
+  font-family: "PlusJakartaSans-Bold" -apple-system, BlinkMacSystemFont,
+    sans-serif;
 }
 
 .input-container > span {
