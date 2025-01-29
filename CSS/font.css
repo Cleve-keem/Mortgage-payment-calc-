@@ -1,0 +1,19 @@
+@font-face {
+    font-family: "PlusJakartaSans-Bold";
+    src: url("../assets/fonts/static/PlusJakartaSans-Bold.ttf");
+}
+
+@font-face {
+    font-family: "PlusJakartaSans-Medium";
+    src: url("../assets/fonts/static/PlusJakartaSans-Medium.ttf");
+}
+
+@font-face {
+    font-family: "PlusJakartaSans-Italic";
+    src: url("../assets/fonts/PlusJakartaSans-Italic-VariableFont_wght.ttf");
+}
+
+@font-face {
+    font-family: "PlusJakartaSans";
+    src: url("../assets/fonts/PlusJakartaSans-VariableFont_wght.ttf");
+}
