@@ -5,3 +5,10 @@ p{
 .container{
     padding: 1.5rem;
 }
+
+button{
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

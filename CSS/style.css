@@ -44,10 +44,13 @@ label {
   color: var(--Slate-700);
 }
 
+.input-container,
+.radio-container {
+  border: 1px solid var(--Slate-700);
+  border-radius: 5px;
+}
 .input-container {
   display: flex;
-  border: 1px solid var(--Slate-900);
-  border-radius: 5px;
   overflow: hidden;
 }
 
@@ -75,4 +78,62 @@ input {
   font-size: 20px;
   font-weight: 700;
   text-align: center;
+}
+
+.radio-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--Slate-700);
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: background 0.3s, border 0.3s;
+}
+
+.radio-container:hover {
+  border-color: var(--Lime);
+  background-color: var(--Lime);
+}
+
+.radio-container input {
+  display: none;
+}
+
+.radio-container > .custom-radio {
+  width: 19px;
+  height: 19px;
+  background-color: transparent;
+  border-radius: 50%;
+  border: 2px solid var(--Slate-700);
+  position: relative;
+  cursor: pointer;
+}
+
+.radio-container input:checked + .custom-radio::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  background-color: var(--Lime);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.radio-container input:checked + .custom-radio {
+  border-color: var(--Lime);
+}
+
+button{
+    padding: 12px 0;
+    border-radius: 20px;
+    gap: 10px;
+    background-color: var(--Lime);
+    font-weight: 700;
+}
+
+button:hover{
+    filter: opacity(0.7);
 }

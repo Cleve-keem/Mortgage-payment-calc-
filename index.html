@@ -9,8 +9,8 @@
       sizes="32x32"
       href="./assets/images/favicon-32x32.png"
     />
-    <link rel="stylesheet" href="./CSS/style.css">
-    <link rel="stylesheet" href="./CSS/utilities.css">
+    <link rel="stylesheet" href="./CSS/style.css" />
+    <link rel="stylesheet" href="./CSS/utilities.css" />
     <title>Mortgage repayment calculator</title>
   </head>
   <body>
@@ -24,35 +24,46 @@
           <div class="field">
             <label for="amount">Mortgage Amount</label>
             <div class="input-container reverse">
-              <input type="text">
+              <input type="text" />
               <span>&pound;</span>
             </div>
           </div>
           <div class="field">
-            <label for="amount">Mortgage Termt</label>
+            <label for="term">Mortgage Term</label>
             <div class="input-container">
-              <input type="text">
+              <input type="text" />
               <span>years</span>
             </div>
           </div>
           <div class="field">
-            <label for="amount">Interest Rate</label>
+            <label for="rate">Interest Rate</label>
             <div class="input-container">
-              <input type="text">
+              <input type="text" id="rate" />
               <span>%</span>
             </div>
           </div>
           <div class="field">
-            <label for="amount">Mortgage Type</label>
-            <div class="">
-              <input type="radio">
+            <label for="type">Mortgage Type</label>
+            <div class="radio-container">
+              <input type="radio" name="mortgageType" value="repayment" />
+              <span class="custom-radio"></span>
               <span>Repayment</span>
             </div>
+            <div class="radio-container">
+              <input type="radio" name="mortgageType" value="repayment" />
+              <span class="custom-radio"></span>
+              <span>Interest Only</span>
+            </div>
           </div>
+          <button type="submit">
+            <img
+              src="./assets/images/icon-calculator.svg"
+              alt="calculator icon"
+            />Calculate Repayments
+          </button>
         </form>
       </section>
       <section></section>
     </main>
-    
   </body>
 </html>
