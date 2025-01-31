@@ -25,32 +25,31 @@
             <label for="amount">Mortgage Amount</label>
             <div
               class="input-container reverse"
-              id="amount"
-              aria-describedby="mortgagte-amount"
+              aria-describedby="mortgage-amount"
             >
-              <input type="text" />
+              <input type="number" id="amount"/>
               <span>&pound;</span>
             </div>
-            <span class="error" id="mortgagte-amount"></span>
+            <span class="error" id="mortgage-amount"></span>
           </div>
           <div class="desktop-view mobile-view">
             <div class="field">
               <label for="term">Mortgage Term</label>
               <div class="input-container">
                 <input
-                  type="text"
+                  type="number"
                   id="term"
-                  aria-describedby="mortgagte-term"
+                  aria-describedby="mortgage-term"
                 />
                 <span>years</span>
               </div>
-              <span class="error" id="mortgagte-term"></span>
+              <span class="error" id="mortgage-term"></span>
             </div>
             <div class="field">
               <label for="rate">Interest Rate</label>
               <div class="input-container">
                 <input
-                  type="text"
+                  type="number"
                   id="rate"
                   aria-describedby="mortgagte-rate"
                 />

@@ -90,7 +90,7 @@ input {
   text-align: center;
 }
 
-.mobile-view{
+.mobile-view {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -211,6 +211,6 @@ button:hover {
   margin: 15px 0;
 }
 
-.total-repay{
+.total-repay {
   font-size: 20px;
 }
