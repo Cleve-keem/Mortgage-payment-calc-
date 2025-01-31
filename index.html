@@ -23,37 +23,65 @@
         <form class="form">
           <div class="field">
             <label for="amount">Mortgage Amount</label>
-            <div class="input-container reverse">
+            <div
+              class="input-container reverse"
+              id="amount"
+              aria-describedby="mortgagte-amount"
+            >
               <input type="text" />
               <span>&pound;</span>
             </div>
+            <span class="error" id="mortgagte-amount"></span>
           </div>
-          <div class="field">
-            <label for="term">Mortgage Term</label>
-            <div class="input-container">
-              <input type="text" />
-              <span>years</span>
+          <div class="desktop-view">
+            <div class="field">
+              <label for="term">Mortgage Term</label>
+              <div class="input-container">
+                <input
+                  type="text"
+                  id="term"
+                  aria-describedby="mortgagte-term"
+                />
+                <span>years</span>
+              </div>
+              <span class="error" id="mortgagte-term"></span>
             </div>
-          </div>
-          <div class="field">
-            <label for="rate">Interest Rate</label>
-            <div class="input-container">
-              <input type="text" id="rate" />
-              <span>%</span>
+            <div class="field">
+              <label for="rate">Interest Rate</label>
+              <div class="input-container">
+                <input
+                  type="text"
+                  id="rate"
+                  aria-describedby="mortgagte-rate"
+                />
+                <span>%</span>
+              </div>
+              <span class="error" id="mortgagte-rate"></span>
             </div>
           </div>
           <div class="field">
             <label for="type">Mortgage Type</label>
             <div class="radio-container">
-              <input type="radio" name="mortgageType" value="repayment" />
+              <input
+                type="radio"
+                name="mortgageType"
+                value="repayment"
+                id="type"
+              />
               <span class="custom-radio"></span>
               <span>Repayment</span>
             </div>
             <div class="radio-container">
-              <input type="radio" name="mortgageType" value="repayment" />
+              <input
+                type="radio"
+                name="mortgageType"
+                value="repayment"
+                id="type"
+              />
               <span class="custom-radio"></span>
               <span>Interest Only</span>
             </div>
+            <span class="error" id="mortgage-type"></span>
           </div>
           <button type="submit">
             <img
@@ -63,7 +91,36 @@
           </button>
         </form>
       </section>
-      <section></section>
+      <section class="container results">
+        <div class="empty-result hidden">
+          <img
+            src="./assets/images/illustration-empty.svg"
+            alt="calculators, file and money"
+          />
+
+          <h2>Results shown here</h2>
+          <p>
+            Complete the form and click “calculate repayments” to see what your
+            monthly repayments would be.
+          </p>
+        </div>
+        <div class="completed-result">
+          <h2>Your results</h2>
+          <p class="result-desc">
+            Your results are shown below based on the information you provided.
+            To adjust the results, edit the form and click “calculate
+            repayments” again.
+          </p>
+
+          <div class="result-details">
+            <p>Your monthly repayments</p>
+            <span class="mnthly-repay">$</span>
+            <span class="line"></span>
+            <p>Total you'll repay over the term</p>
+            <span class="total-repay">$</span>
+          </div>
+        </div>
+      </section>
     </main>
   </body>
 </html>
