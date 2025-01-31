@@ -1,18 +1,22 @@
-p{
-    font-size: 16px;
+p {
+  font-size: 16px;
 }
 
-.container{
-    padding: 1.5rem;
+.container {
+  padding: 1.5rem;
 }
 
-button{
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+button {
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.hidden{
-    display: none;
+.hidden {
+  display: none;
+}
+
+.reverse {
+  flex-direction: row-reverse;
 }

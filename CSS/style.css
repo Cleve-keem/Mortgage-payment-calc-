@@ -22,7 +22,7 @@
 
   --Bold-font: "PlusJakartaSans-Bold", -apple-system, BlinkMacSystemFont,
     sans-serif;
-  --Medium-font: "PlusJakartaSans-Medium";
+  --Medium-font: "PlusJakartaSans-Medium", "Arial", sans-serif;
 }
 
 main {
@@ -64,10 +64,6 @@ label {
   overflow: hidden;
 }
 
-.input-container.reverse {
-  flex-direction: row-reverse;
-}
-
 input {
   flex: 1;
   border: none;
@@ -78,6 +74,18 @@ input {
   color: var(--Slate-900);
   font-family: "PlusJakartaSans-Bold", -apple-system, BlinkMacSystemFont,
     sans-serif;
+}
+
+/* Hide spinners in WebKit browsers */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Hide number input spinner in Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 
 .input-container > span {
@@ -134,15 +142,16 @@ input {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-53%, -46%);
+  transform: translate(-50%, -50%);
 }
 
 .radio-container input:checked + .custom-radio {
   border-color: var(--Lime);
 }
 
-.radio-container.active {
+.radio-container:has(input:checked) {
   background-color: var(--Faded-Lime);
+  border-color: var(--Lime);
 }
 
 button {
@@ -185,7 +194,7 @@ button:hover {
 
 .result-details {
   background-color: var(--Dark-slate-900);
-  padding: 1rem;
+  padding: 1.5rem;
   border-top: 3px solid var(--Lime);
   border-radius: 8px;
 }
