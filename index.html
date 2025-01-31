@@ -27,7 +27,11 @@
               class="input-container reverse"
               aria-describedby="mortgage-amount"
             >
-              <input type="number" id="amount" inputmode="numeric"/>
+              <input
+                type="number"
+                id="amount"
+                aria-describedby="mortgage-amount"
+              />
               <span>&pound;</span>
             </div>
             <span class="error" id="mortgage-amount"></span>
@@ -40,6 +44,7 @@
                   type="number"
                   id="term"
                   aria-describedby="mortgage-term"
+                  inputmode="numeric"
                 />
                 <span>years</span>
               </div>
@@ -49,13 +54,15 @@
               <label for="rate">Interest Rate</label>
               <div class="input-container">
                 <input
-                  type="number"
+                  type="text"
                   id="rate"
                   aria-describedby="mortgagte-rate"
+                  inputmode="decimal"
+                  pattern="[0-9]*"
                 />
                 <span>%</span>
               </div>
-              <span class="error" id="mortgagte-rate"></span>
+              <span class="error" id="mortgage-rate"></span>
             </div>
           </div>
           <div class="field">
@@ -68,7 +75,7 @@
                 id="repayment"
               />
               <span class="custom-radio"></span>
-              <label for="repayment">Repayment</span>
+              <label for="repayment">Repayment</label>
             </div>
             <div class="radio-container">
               <input
@@ -121,5 +128,6 @@
         </div>
       </section>
     </main>
+    <script src="script.js"></script>
   </body>
 </html>
