@@ -18,6 +18,11 @@
   --Slate-500: hsl(200, 26%, 54%);
   --Slate-700: hsl(200, 24%, 40%);
   --Slate-900: hsl(202, 55%, 16%);
+  --Dark-slate-900: hsl(201, 66%, 10%);
+
+  --Bold-font: "PlusJakartaSans-Bold", -apple-system, BlinkMacSystemFont,
+    sans-serif;
+  --Medium-font: "PlusJakartaSans-Medium";
 }
 
 main {
@@ -25,8 +30,7 @@ main {
 }
 
 header {
-  font-family: "PlusJakartaSans-Bold", -apple-system, BlinkMacSystemFont,
-    sans-serif;
+  font-family: var(--Bold-font);
   font-size: 18px;
   margin-bottom: 1rem;
 }
@@ -168,12 +172,38 @@ button:hover {
   padding: 1rem;
 }
 
-.completed-result > h2+p{
-  margin-bottom: 1rem;
+.completed-result > h2 + p {
+  margin-bottom: 1.2rem;
 }
 
-.result-details{
-  background-color: var(--Slate-900);
-  padding: 10px;
+.result-details {
+  background-color: var(--Dark-slate-900);
+  padding: 1rem;
+  border-top: 3px solid var(--Lime);
+  border-radius: 8px;
 }
 
+.result-details > p {
+  margin-bottom: 0.7rem;
+}
+
+.result-details p + span {
+  font-family: var(--Medium-font);
+}
+
+.mnthly-repay {
+  font-size: 30px;
+  color: var(--Lime);
+}
+
+.line {
+  display: inline-block;
+  width: 100%;
+  height: 1px;
+  background-color: var(--Slate-500);
+  margin: 15px 0;
+}
+
+.total-repay{
+  font-size: 20px;
+}
