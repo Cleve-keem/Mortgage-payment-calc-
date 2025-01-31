@@ -155,6 +155,7 @@ button:hover {
 .results {
   background-color: var(--Slate-900);
   color: var(--White);
+  padding: 0 0 2rem;
 }
 
 .results h2 {
