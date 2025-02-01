@@ -98,6 +98,27 @@ input[type="number"] {
   text-align: center;
 }
 
+.error{
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--Red);
+  display: none;
+  margin-top: 8px;
+}
+
+.error.show{
+  display: inline-block;
+}
+
+.field:has(.error.show) .input-container{
+  border-color: var(--Red);
+}
+
+.field:has(.error.show) .input-container > span{
+  background-color: var(--Red);
+  color: var(--White);
+}
+
 .mobile-view {
   display: flex;
   flex-direction: column;
