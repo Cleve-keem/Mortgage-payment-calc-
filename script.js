@@ -4,7 +4,11 @@ const interestRate = document.getElementById("rate");
 const form = document.getElementById("form");
 
 mortgageAmount.addEventListener("input", (event) => {
-    
+    // Clear error indicator if any
+  event.target.parentElement.parentElement
+    .querySelector(".error")
+    .classList.remove("show");
+
   let amount = event.target.value.replace(/[^0-9\.]/g, "");
   let formattedNumber = amount.replace(/\B(?=(\d{3})+(?!\d))/g, ","); // Remove alphabets
   event.target.value = formattedNumber;
@@ -18,7 +22,7 @@ function isValueValid(value, valueError) {
   if (isNaN(value) || value === "" || value <= 0) {
     isValid = false;
     valueError.classList.add("show");
-    valueError.innerHTML = "This field is required";
+    valueError.innerHTML = "This field is required"; // .querySelector(".error").classList.remove("show");
   } else {
     valueError.classList.remove("show");
     valueError.innerHTML = "";
