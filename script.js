@@ -1,6 +1,8 @@
 const mortgageAmount = document.getElementById("amount");
 const mortgageTerm = document.getElementById("term");
 const interestRate = document.getElementById("rate");
+const repayment = document.getElementById("repayment");
+const interestOnly = document.getElementById("interest-only");
 const form = document.getElementById("form");
 
 const SHOW_CLASS = "show";
@@ -51,6 +53,8 @@ function checkValidation() {
   const loanTerm = +mortgageTerm.value;
   const rate = +interestRate.value;
 
+  //   console.log(isRepayment);
+
   const loanAmountError = document.getElementById("mortgage-amount");
   const loanTermError = document.getElementById("mortgage-term");
   const rateError = document.getElementById("mortgage-rate");
@@ -67,7 +71,7 @@ function checkValidation() {
   return { loanAmount, loanTerm, rate };
 }
 
-function calculateMortgate(loanAmount, loanTerm, rate) {
+function calculateRepaymentMortgate(loanAmount, loanTerm, rate) {
   // convert interest rate to monthly
   const r = rate / 100 / 12;
 
@@ -79,15 +83,34 @@ function calculateMortgate(loanAmount, loanTerm, rate) {
   return mortgage.toFixed(2);
 }
 
+function calculateInterestOnlyMortgage(loanAmount, loanTerm, rate) {
+  // Calculate annual interest rate
+  const r = rate / 100;
+  const mortgage = loanAmount * r * loanTerm;
+  return mortgage.toFixed(2);
+}
+
 form.addEventListener("submit", function (event) {
   event.preventDefault();
   const validatedInputs = checkValidation();
+  let mortgage;
 
   if (!validatedInputs) {
     return;
   }
 
+  const isRepayment = repayment.checked;
+  const isInterestOnly = interestOnly.checked;
   const { loanAmount, loanTerm, rate } = validatedInputs;
-  const mortgage = calculateMortgate(loanAmount, loanTerm, rate);
+
+  if (isRepayment) {
+    mortgage = calculateRepaymentMortgate(loanAmount, loanTerm, rate);
+  } else if (isInterestOnly) {
+    mortgage = calculateInterestOnlyMortgage(loanAmount, loanTerm, rate);
+  } else {
+    const mortgageTypeError = document.getElementById("mortgage-type");
+    mortgageTypeError.classList.add(SHOW_CLASS);
+    mortgageTypeError.innerHTML = "This field is required";
+  }
   alert(mortgage);
 });
