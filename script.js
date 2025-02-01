@@ -3,28 +3,43 @@ const mortgageTerm = document.getElementById("term");
 const interestRate = document.getElementById("rate");
 const form = document.getElementById("form");
 
+const SHOW_CLASS = "show";
+
 mortgageAmount.addEventListener("input", (event) => {
-    // Clear error indicator if any
+  // Clear error indicator if any
   event.target.parentElement.parentElement
     .querySelector(".error")
-    .classList.remove("show");
+    .classList.remove(SHOW_CLASS);
 
+  // Remove any special char and alphabets expect digits
   let amount = event.target.value.replace(/[^0-9\.]/g, "");
-  let formattedNumber = amount.replace(/\B(?=(\d{3})+(?!\d))/g, ","); // Remove alphabets
+  let formattedNumber = amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   event.target.value = formattedNumber;
 });
 
+// Clear error indicator at focus if there is any
+mortgageTerm.addEventListener("input", (event) => {
+  event.target.parentElement.parentElement
+    .querySelector(".error")
+    .classList.remove(SHOW_CLASS);
+});
 
+// Clear error indicator at focus if there is any
+interestRate.addEventListener("input", (event) => {
+  event.target.parentElement.parentElement
+    .querySelector(".error")
+    .classList.remove(SHOW_CLASS);
+});
 
 function isValueValid(value, valueError) {
   let verified = true;
 
   if (isNaN(value) || value === "" || value <= 0) {
     isValid = false;
-    valueError.classList.add("show");
-    valueError.innerHTML = "This field is required"; // .querySelector(".error").classList.remove("show");
+    valueError.classList.add(SHOW_CLASS);
+    valueError.innerHTML = "This field is required";
   } else {
-    valueError.classList.remove("show");
+    valueError.classList.remove(SHOW_CLASS);
     valueError.innerHTML = "";
   }
 
