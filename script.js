@@ -53,8 +53,6 @@ function checkValidation() {
   const loanTerm = +mortgageTerm.value;
   const rate = +interestRate.value;
 
-  //   console.log(isRepayment);
-
   const loanAmountError = document.getElementById("mortgage-amount");
   const loanTermError = document.getElementById("mortgage-term");
   const rateError = document.getElementById("mortgage-rate");
