@@ -131,11 +131,11 @@ form.addEventListener("submit", function (event) {
   if (isRepayment) {
     mortgage = calculateRepaymentMortgate(loanAmount, loanTerm, rate);
     if (mortgage === null || mortgage === undefined) return;
-    resultsComponent(Number(mortgage).toLocaleString());
+    resultsComponent(mortgage, loanTerm);
   } else if (isInterestOnly) {
     mortgage = calculateInterestOnlyMortgage(loanAmount, loanTerm, rate);
     if (mortgage === null || mortgage === undefined) return;
-    resultsComponent(Number(mortgage).toLocaleString());
+    resultsComponent(mortgage, loanTerm);
   } else {
     const mortgageTypeError = document.getElementById("mortgage-type");
     mortgageTypeError.classList.add(SHOW_CLASS);
@@ -143,10 +143,10 @@ form.addEventListener("submit", function (event) {
   }
 });
 
-function resultsComponent(mortgage) {
+function resultsComponent(mortgage, loanTerm) {
   const results = document.querySelector(".results");
   results.innerHTML = "";
-
+  const totalRepayment = (Number(mortgage) * loanTerm * 12).toFixed(2);
   results.innerHTML = `
   <div class="completed-result">
     <h2>Your results</h2>
@@ -157,10 +157,22 @@ function resultsComponent(mortgage) {
     </p>
     <div class="result-details">
       <p>Your monthly repayments</p>
-      <span class="mnthly-repay">&pound;${mortgage}</span>
+      <span class="mnthly-repay">&pound;${Number(
+        mortgage
+      ).toLocaleString()}</span>
       <span class="line"></span>
       <p>Total you'll repay over the term</p>
-      <span class="total-repay">&pound;537,322.94</span>
+      <span class="total-repay">&pound;${Number(
+        totalRepayment
+      ).toLocaleString()}</span>
     </div>
   </div>`;
+}
+
+function clearAll() {
+  mortgageAmount.value = "";
+  interestRate.value = "";
+  mortgageTerm.value = "";
+  repayment.uncheck;
+  interestOnly.uncheck;
 }
