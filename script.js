@@ -4,6 +4,7 @@ const interestRate = document.getElementById("rate");
 const repayment = document.getElementById("repayment");
 const interestOnly = document.getElementById("interest-only");
 const form = document.getElementById("form");
+const rateError = document.getElementById("mortgage-rate");
 
 const SHOW_CLASS = "show";
 
@@ -31,6 +32,14 @@ interestRate.addEventListener("input", (event) => {
   event.target.parentElement.parentElement
     .querySelector(".error")
     .classList.remove(SHOW_CLASS);
+
+  let value = parseInt(event.target.value, 10);
+
+  if (isNaN(value) || value < 1) {
+    event.target.value = ""; // Reset to minimum allowed value
+  } else if (value > 100) {
+    event.target.value = 100; // Reset to maximum allowed value
+  }
 });
 
 function isValueValid(value, valueError) {
@@ -55,7 +64,6 @@ function checkValidation() {
 
   const loanAmountError = document.getElementById("mortgage-amount");
   const loanTermError = document.getElementById("mortgage-term");
-  const rateError = document.getElementById("mortgage-rate");
 
   let isValid =
     isValueValid(loanAmount, loanAmountError) &&
