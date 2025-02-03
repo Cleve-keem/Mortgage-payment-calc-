@@ -48,6 +48,7 @@ function isValueValid(value, errorElement) {
   if (isNaN(value) || value === "" || value <= 0) {
     errorElement.classList.add(SHOW_CLASS);
     errorElement.innerHTML = "This field is required";
+    // Reset result if any error
     resetResult();
     return false;
   }
