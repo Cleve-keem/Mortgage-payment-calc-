@@ -120,12 +120,6 @@ input[type="number"] {
   color: var(--White);
 }
 
-.mobile-view {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
 .radio-container {
   display: flex;
   align-items: center;
@@ -244,4 +238,22 @@ button:hover {
 
 .total-repay {
   font-size: 20px;
+}
+
+@media screen and (max-width: 400px){
+  .input-container{
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+  .input-container > input {
+    flex: 1;
+    min-width: 100px;
+  }
+
+  .mobile-view {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
 }
