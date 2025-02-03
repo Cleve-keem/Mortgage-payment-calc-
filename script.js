@@ -48,7 +48,7 @@ function isValueValid(value, errorElement) {
   if (isNaN(value) || value === "" || value <= 0) {
     errorElement.classList.add(SHOW_CLASS);
     errorElement.innerHTML = "This field is required";
-
+    resetResult();
     return false;
   }
   errorElement.classList.remove(SHOW_CLASS);
@@ -164,6 +164,10 @@ function clearAll() {
     error.innerHTML = "";
   });
 
+  resetResult();
+}
+
+function resetResult() {
   results.innerHTML = `
   <div class="empty-result">
     <img
