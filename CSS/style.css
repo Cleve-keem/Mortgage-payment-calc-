@@ -27,6 +27,7 @@
 
 main {
   background-color: var(--White);
+  min-height: 100vh;
 }
 
 header {

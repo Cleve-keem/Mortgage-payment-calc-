@@ -5,97 +5,87 @@ const repayment = document.getElementById("repayment");
 const interestOnly = document.getElementById("interest-only");
 const form = document.getElementById("form");
 const rateError = document.getElementById("mortgage-rate");
+const mortgageTypeError = document.getElementById("mortgage-type");
+const results = document.querySelector(".results");
 
 const SHOW_CLASS = "show";
 
+function clearError(input) {
+  const errorElement =
+    input.parentElement.parentElement.querySelector(".error");
+  if (errorElement) errorElement.classList.remove(SHOW_CLASS);
+}
+
 mortgageAmount.addEventListener("input", (event) => {
-  // Clear error indicator if any
-  event.target.parentElement.parentElement
-    .querySelector(".error")
-    .classList.remove(SHOW_CLASS);
+  // Remove error indicator on focus
+  clearError(event.target);
 
   // Remove any special char and alphabets expect digits
-  let amount = event.target.value.replace(/[^0-9\.]/g, "");
-  let formattedNumber = amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  event.target.value = formattedNumber;
+  event.target.value = event.target.value
+    .replace(/[^0-9\.]/g, "")
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 });
 
-// Clear error indicator at focus if there is any
+// Remove error indicator on focus
 mortgageTerm.addEventListener("input", (event) => {
-  event.target.parentElement.parentElement
-    .querySelector(".error")
-    .classList.remove(SHOW_CLASS);
+  clearError(event.target);
 });
 
-// Clear error indicator at focus if there is any
+// Remove error indicator on focus
 interestRate.addEventListener("input", (event) => {
-  event.target.parentElement.parentElement
-    .querySelector(".error")
-    .classList.remove(SHOW_CLASS);
+  clearError(event.target);
 
-  let value = parseInt(event.target.value, 10);
-
+  // Interest rate validation: restrict to 1-100
+  let value = parseFloat(event.target.value);
   if (isNaN(value) || value < 1) {
-    event.target.value = ""; // Reset to minimum allowed value
+    event.target.value = "";
   } else if (value > 100) {
-    event.target.value = 100; // Reset to maximum allowed value
+    event.target.value = "100";
   }
 });
 
-function isValueValid(value, valueError) {
-  let verified = true;
-
+function isValueValid(value, errorElement) {
   if (isNaN(value) || value === "" || value <= 0) {
-    isValid = false;
-    valueError.classList.add(SHOW_CLASS);
-    valueError.innerHTML = "This field is required";
-  } else {
-    valueError.classList.remove(SHOW_CLASS);
-    valueError.innerHTML = "";
-  }
+    errorElement.classList.add(SHOW_CLASS);
+    errorElement.innerHTML = "This field is required";
 
-  return verified;
+    return false;
+  }
+  errorElement.classList.remove(SHOW_CLASS);
+  errorElement.innerHTML = "";
+
+  return true;
 }
 
 function checkValidation() {
-  const loanAmount = +mortgageAmount.value.replace(/,/g, "");
-  const loanTerm = +mortgageTerm.value;
-  const rate = +interestRate.value;
+  const loanAmount = parseFloat(mortgageAmount.value.replace(/,/g, ""));
+  const loanTerm = parseInt(mortgageTerm.value, 10);
+  const rate = parseFloat(interestRate.value);
 
   const loanAmountError = document.getElementById("mortgage-amount");
   const loanTermError = document.getElementById("mortgage-term");
 
   let isValid =
-    isValueValid(loanAmount, loanAmountError) &&
-    isValueValid(loanTerm, loanTermError) &&
+    isValueValid(loanAmount, loanAmountError) &
+    isValueValid(loanTerm, loanTermError) &
     isValueValid(rate, rateError);
 
-  if (!isValid) {
-    return;
+  // Check if repayment or interest-only is selected
+  if (!repayment.checked && !interestOnly.checked) {
+    mortgageTypeError.classList.add(SHOW_CLASS);
+    mortgageTypeError.innerHTML = "Please select a mortgage type";
+    isValid = false;
+  } else {
+    mortgageTypeError.classList.remove(SHOW_CLASS);
+    mortgageTypeError.innerHTML = "";
   }
 
-  return { loanAmount, loanTerm, rate };
+  return isValid ? { loanAmount, loanTerm, rate } : null;
 }
 
 function calculateRepaymentMortgate(loanAmount, loanTerm, rate) {
-  if (
-    loanAmount === null ||
-    loanAmount === undefined ||
-    isNaN(loanAmount) ||
-    loanAmount <= 0 ||
-    loanTerm === null ||
-    loanTerm === undefined ||
-    isNaN(loanTerm) ||
-    loanTerm <= 0 ||
-    rate === null ||
-    rate === undefined ||
-    isNaN(rate) ||
-    rate <= 0
-  ) {
-    console.error(
-      "Invalid input: loanAmount, loanTerm, and rate are required."
-    );
-    return null; // Prevents further execution
+  if (!loanAmount || !loanTerm || !rate) {
+    return null;
   }
   // convert interest rate to monthly
   const r = rate / 100 / 12;
@@ -109,10 +99,11 @@ function calculateRepaymentMortgate(loanAmount, loanTerm, rate) {
 }
 
 function calculateInterestOnlyMortgage(loanAmount, loanTerm, rate) {
+  if (!loanAmount || !loanTerm || !rate) {
+    return null;
+  }
   // Calculate annual interest rate
-  const r = rate / 100;
-  const mortgage = loanAmount * r * loanTerm;
-  return mortgage.toFixed(2);
+  return (loanAmount * (rate / 100) * loanTerm).toFixed(2);
 }
 
 form.addEventListener("submit", function (event) {
@@ -120,31 +111,22 @@ form.addEventListener("submit", function (event) {
   const validatedInputs = checkValidation();
   let mortgage;
 
-  if (!validatedInputs) {
-    return;
-  }
+  if (!validatedInputs) return;
 
-  const isRepayment = repayment.checked;
-  const isInterestOnly = interestOnly.checked;
   const { loanAmount, loanTerm, rate } = validatedInputs;
 
-  if (isRepayment) {
+  if (repayment.checked) {
     mortgage = calculateRepaymentMortgate(loanAmount, loanTerm, rate);
-    if (mortgage === null || mortgage === undefined) return;
-    resultsComponent(mortgage, loanTerm);
-  } else if (isInterestOnly) {
+  } else if (interestOnly.checked) {
     mortgage = calculateInterestOnlyMortgage(loanAmount, loanTerm, rate);
-    if (mortgage === null || mortgage === undefined) return;
-    resultsComponent(mortgage, loanTerm);
-  } else {
-    const mortgageTypeError = document.getElementById("mortgage-type");
-    mortgageTypeError.classList.add(SHOW_CLASS);
-    mortgageTypeError.innerHTML = "This field is required";
+  }
+
+  if (mortgage !== null) {
+    return resultsComponent(mortgage, loanTerm);
   }
 });
 
 function resultsComponent(mortgage, loanTerm) {
-  const results = document.querySelector(".results");
   results.innerHTML = "";
   const totalRepayment = (Number(mortgage) * loanTerm * 12).toFixed(2);
   results.innerHTML = `
@@ -173,6 +155,26 @@ function clearAll() {
   mortgageAmount.value = "";
   interestRate.value = "";
   mortgageTerm.value = "";
-  repayment.uncheck;
-  interestOnly.uncheck;
+  repayment.checked = false;
+  interestOnly.checked = false;
+
+  // Clear error messages
+  document.querySelectorAll(".error").forEach((error) => {
+    error.classList.remove(SHOW_CLASS);
+    error.innerHTML = "";
+  });
+
+  results.innerHTML = `
+  <div class="empty-result">
+    <img
+      src="./assets/images/illustration-empty.svg"
+      alt="calculators, file and money"
+    />
+
+    <h2>Results shown here</h2>
+    <p>
+      Complete the form and click “calculate repayments” to see what your
+      monthly repayments would be.
+    </p>
+  </div>`;
 }
