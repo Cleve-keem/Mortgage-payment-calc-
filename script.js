@@ -78,6 +78,25 @@ function checkValidation() {
 }
 
 function calculateRepaymentMortgate(loanAmount, loanTerm, rate) {
+  if (
+    loanAmount === null ||
+    loanAmount === undefined ||
+    isNaN(loanAmount) ||
+    loanAmount <= 0 ||
+    loanTerm === null ||
+    loanTerm === undefined ||
+    isNaN(loanTerm) ||
+    loanTerm <= 0 ||
+    rate === null ||
+    rate === undefined ||
+    isNaN(rate) ||
+    rate <= 0
+  ) {
+    console.error(
+      "Invalid input: loanAmount, loanTerm, and rate are required."
+    );
+    return null; // Prevents further execution
+  }
   // convert interest rate to monthly
   const r = rate / 100 / 12;
 
@@ -111,12 +130,37 @@ form.addEventListener("submit", function (event) {
 
   if (isRepayment) {
     mortgage = calculateRepaymentMortgate(loanAmount, loanTerm, rate);
+    if (mortgage === null || mortgage === undefined) return;
+    resultsComponent(Number(mortgage).toLocaleString());
   } else if (isInterestOnly) {
     mortgage = calculateInterestOnlyMortgage(loanAmount, loanTerm, rate);
+    if (mortgage === null || mortgage === undefined) return;
+    resultsComponent(Number(mortgage).toLocaleString());
   } else {
     const mortgageTypeError = document.getElementById("mortgage-type");
     mortgageTypeError.classList.add(SHOW_CLASS);
     mortgageTypeError.innerHTML = "This field is required";
   }
-  alert(mortgage);
 });
+
+function resultsComponent(mortgage) {
+  const results = document.querySelector(".results");
+  results.innerHTML = "";
+
+  results.innerHTML = `
+  <div class="completed-result">
+    <h2>Your results</h2>
+    <p class="result-desc">
+      Your results are shown below based on the information you provided.
+      To adjust the results, edit the form and click “calculate
+      repayments” again.
+    </p>
+    <div class="result-details">
+      <p>Your monthly repayments</p>
+      <span class="mnthly-repay">&pound;${mortgage}</span>
+      <span class="line"></span>
+      <p>Total you'll repay over the term</p>
+      <span class="total-repay">&pound;537,322.94</span>
+    </div>
+  </div>`;
+}
