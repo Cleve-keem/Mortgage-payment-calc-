@@ -1,5 +1,10 @@
 @import url("./font.css");
 
+html,
+body {
+  height: 100%;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -27,7 +32,6 @@
 
 main {
   background-color: var(--White);
-  min-height: 100vh;
 }
 
 header {
@@ -99,7 +103,7 @@ input[type="number"] {
   text-align: center;
 }
 
-.error{
+.error {
   font-size: 13px;
   font-weight: 400;
   color: var(--Red);
@@ -107,15 +111,15 @@ input[type="number"] {
   margin-top: 8px;
 }
 
-.error.show{
+.error.show {
   display: inline-block;
 }
 
-.field:has(.error.show) .input-container{
+.field:has(.error.show) .input-container {
   border-color: var(--Red);
 }
 
-.field:has(.error.show) .input-container > span{
+.field:has(.error.show) .input-container > span {
   background-color: var(--Red);
   color: var(--White);
 }
@@ -129,10 +133,6 @@ input[type="number"] {
   cursor: pointer;
   margin-bottom: 10px;
   transition: background 0.3s, border 0.3s;
-}
-
-.radio-container:hover {
-  border-color: var(--Lime);
 }
 
 .radio-container input {
@@ -177,10 +177,6 @@ button {
   background-color: var(--Lime);
   color: var(--Slate-900);
   font-weight: 700;
-}
-
-button:hover {
-  filter: opacity(0.7);
 }
 
 .results {
@@ -240,8 +236,12 @@ button:hover {
   font-size: 20px;
 }
 
-@media screen and (max-width: 400px){
-  .input-container{
+@media screen and (max-width: 400px) {
+  main {
+    min-height: 100vh;
+  }
+
+  .input-container {
     display: flex;
     flex-wrap: nowrap;
   }
@@ -251,9 +251,66 @@ button:hover {
     min-width: 100px;
   }
 
-  .mobile-view {
+  .input-container > span {
+    white-space: nowrap;
+    min-width: 45px;
+  }
+
+  .mobile.view {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+  }
+}
+
+@media screen and (min-width: 540px) {
+  .mobile.view {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .mobile.view .field {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .mobile.view input {
+    width: 100%;
+    flex-grow: 1;
+  }
+
+  button:hover {
+    filter: opacity(0.7);
+  }
+
+  .radio-container:hover {
+    border-color: var(--Lime);
+  }
+}
+
+@media screen and (min-width: 800px) {
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: var(--Slate-700);
+  }
+  main {
+    max-width: 1000px;
+    display: flex;
+    height: fit-content;
+    justify-content: center;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .results {
+    border-bottom-left-radius: 150px;
+  }
+
+  .empty-result {
+    margin: auto;
   }
 }
